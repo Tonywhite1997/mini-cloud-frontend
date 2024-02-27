@@ -5,7 +5,6 @@ import urls from "./authURL";
 import { FILE, FileContextType, USER, UserContextType } from "./customTypes";
 import { returnToLoginPage } from "./generalCommands/ReturnToLoginPage";
 import Loader from "../UI/Loader";
-import Header from "../components/Header";
 
 const initialUser = {
   allocatedSpace: 0,

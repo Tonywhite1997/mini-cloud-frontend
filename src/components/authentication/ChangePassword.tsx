@@ -6,7 +6,6 @@ import urls from "../../utils/authURL";
 import { returnToLoginPage } from "../../utils/generalCommands/ReturnToLoginPage";
 import { PASSWORD_ERROR, NEW_PASSWORD } from "../../utils/customTypes";
 import SmallLoader from "../../UI/SmallLoader";
-import { Link } from "react-router-dom";
 
 function ChangePassword() {
   const [newPasswordInfo, setNewPasswordInfo] = useState<NEW_PASSWORD>({

@@ -5,7 +5,6 @@ import urls from "../../utils/authURL";
 import { PASSWORD_ERROR } from "../../utils/customTypes";
 import { returnToLoginPage } from "../../utils/generalCommands/ReturnToLoginPage";
 import SmallLoader from "../../UI/SmallLoader";
-import { Link } from "react-router-dom";
 
 function DeleteAccount() {
   const [password, setPassword] = useState<string>("");
