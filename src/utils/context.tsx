@@ -1,11 +1,11 @@
-import React, { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
 import urls from "./authURL";
-import Loader from "../UI/Loader";
 import { FILE, FileContextType, USER, UserContextType } from "./customTypes";
 import { returnToLoginPage } from "./generalCommands/ReturnToLoginPage";
+import Loader from "../UI/Loader";
+import Header from "../components/Header";
 
 const initialUser = {
   allocatedSpace: 0,
@@ -55,40 +55,42 @@ export const UserProvider = ({ children }: ChildrenProps) => {
     setIsLoading(true);
     try {
       const { data } = await axios.get(`${urls.authURL}/check-if-login`);
-      setUser(data?.user);
       setIsLoading(false);
+      setUser(data?.user);
     } catch (error) {
       setIsLoading(false);
       setIsError(true);
       returnToLoginPage(error);
     }
   };
+
   const location = useLocation();
 
-  let shouldAuthCheckRun =
-    !location.pathname.includes("/auth/login") ||
-    !location.pathname.includes("/auth/register");
+  const unCheckRoutes = [
+    "auth/forgot-password",
+    "auth/register",
+    "auth/reset-password",
+  ];
 
-  const { isLoading: queryLoading, isFetching } = useQuery(
-    "PERSIST-LOGIN-DATA",
-    persistLogin,
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      enabled: shouldAuthCheckRun,
+  let shouldAuthCheckRun = unCheckRoutes.some((route: string) => {
+    return location.pathname.includes(route);
+  });
+
+  useEffect(() => {
+    if (!shouldAuthCheckRun) {
+      persistLogin();
     }
-  );
-
-  if (queryLoading || isFetching) {
-    return <Loader />;
-  }
+  }, [shouldAuthCheckRun]);
 
   return (
-    <userContext.Provider
-      value={{ user, setUser, isLoading, setIsLoading, isError }}
-    >
-      {children}
-    </userContext.Provider>
+    <>
+      {isLoading && <Loader />}
+      <userContext.Provider
+        value={{ user, setUser, isLoading, setIsLoading, isError }}
+      >
+        {children}
+      </userContext.Provider>
+    </>
   );
 };
 

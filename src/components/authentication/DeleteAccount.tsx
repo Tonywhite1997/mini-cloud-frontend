@@ -74,11 +74,6 @@ function DeleteAccount() {
       </div>
       {error.isError && <p className="error-msg">{error.errorMsg}</p>}
       <div className="buttons">
-        <button>
-          <Link to="/auth/login" className="delete-account-link">
-            Cancel
-          </Link>
-        </button>
         <button
           className="delete-btn"
           onClick={() => {

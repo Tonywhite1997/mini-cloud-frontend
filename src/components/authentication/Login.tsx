@@ -10,13 +10,21 @@ import { ERROR_DATA, UserContextType } from "../../utils/customTypes";
 function Login() {
   const { user, setUser, isLoading, setIsLoading } =
     useContext<UserContextType>(userContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && user?._id) {
+      console.log("hello");
+
+      navigate("/user/dashboard");
+    }
+  }, [user?._id, navigate]);
 
   const [error, setError] = useState<ERROR_DATA>({
     isError: false,
     errorMsg: "",
   });
 
-  const navigate = useNavigate();
   const [userLoginData, setUserLoginData] = useState({
     email: "",
     password: "",
@@ -67,11 +75,11 @@ function Login() {
     setUser(data && data.data.user);
   }, [setUser, data]);
 
-  useEffect(() => {
-    if (user?._id && !error.isError) {
-      navigate("/user/dashboard");
-    }
-  }, [user?._id, navigate, error.isError]);
+  // useEffect(() => {
+  //   if (user?._id && !error.isError) {
+  //     navigate("/user/dashboard");
+  //   }
+  // }, [user?._id, navigate, error.isError]);
 
   return (
     <section className="login-section">

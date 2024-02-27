@@ -28,13 +28,12 @@
             width: 100%;
             // border: 1px solid red;
             @include flex(column);
-            align-items: flex-start;
-            justify-content: flex-start;
+            align-items: center;
             gap: .5em;
+            text-align: center;
 
             .folder-name {
                 // border: 1px solid red;
-                text-align: center;
                 width: 100%;
             }
 
@@ -44,6 +43,7 @@
                 border: 1px solid grey;
                 text-indent: 1em;
                 font-size: 1rem;
+
             }
 
             label {
@@ -96,19 +96,16 @@
     .folder-backdrop {
         .new-folder {
             width: 100%;
-            padding: 2em 1em;
 
             .folder-name-container {
                 width: 100%;
 
                 input {
-
                     width: 250px;
                 }
             }
 
             .button {
-
                 width: 250px;
             }
         }
@@ -122,12 +119,12 @@
         .new-folder {
             .folder-name-container {
                 input {
-                    width: 200px;
+                    width: 90%;
                 }
             }
 
             .button {
-                width: 200px;
+                width: 90%;
 
                 button {
                     padding: .5em 1em;

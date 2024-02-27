@@ -3,8 +3,8 @@
 
 .login-section {
     // border: 1px solid red;
-    @include flex(column);
-    justify-content: center;
+    @include flex(row);
+    align-items: flex-start;
     padding: 2em 0em;
     min-height: 88%;
 

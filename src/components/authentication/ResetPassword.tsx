@@ -71,6 +71,7 @@ function ResetPassword() {
             borderRadius: ".2em",
             marginBottom: "1em",
             color: "white",
+            textAlign: "center",
           }}
         >
           Your password has been reset successfully <span>&#10003;</span>

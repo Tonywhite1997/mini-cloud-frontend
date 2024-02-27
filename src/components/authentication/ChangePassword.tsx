@@ -91,10 +91,6 @@ function ChangePassword() {
         </div>
         {error.isError && <p className="error-msg">{error.errorMsg}</p>}
         <div className="buttons">
-          <Link to="/auth/login" className="change-password-link">
-            cancel
-          </Link>
-
           <button
             className="continue-btn"
             onClick={(e) => {

@@ -4,8 +4,8 @@
 .signup-section {
     // border: 1px solid red;
     min-height: 88%;
-    @include flex(column);
-    justify-content: center;
+    @include flex(row);
+    align-items: flex-start;
     padding: 2em 0;
 
     .form {

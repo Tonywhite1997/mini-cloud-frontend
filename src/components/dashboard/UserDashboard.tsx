@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import FileSection from "./dashboard-sections/FileSection";
 import UserDetailsSection from "./dashboard-sections/UserDetailsSection";
@@ -25,15 +26,16 @@ function UserDashboard() {
     };
   }, []);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!isLoading && !user?._id) {
-      window.location.assign("/auth/login");
+      navigate("/auth/login");
     }
   }, [user?._id, isLoading]);
 
   const isVerified = user?.isVerified || false;
 
-  // if (!user._id)
   return (
     <main className="dashboard">
       {user?._id && !isVerified && <VerifyAccountNotification />}

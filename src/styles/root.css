@@ -103,11 +103,13 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  justify-content: center;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   padding: 2em 0;
 }
 
@@ -248,11 +250,13 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  justify-content: center;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   padding: 2em 0em;
   min-height: 88%;
 }
@@ -1329,17 +1333,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  align-items: center;
   gap: .5em;
+  text-align: center;
 }
 
 .folder-backdrop .new-folder .folder-name-container .folder-name {
-  text-align: center;
   width: 100%;
 }
 
@@ -1422,7 +1421,6 @@
 @media screen and (max-width: 880px) {
   .folder-backdrop .new-folder {
     width: 100%;
-    padding: 2em 1em;
   }
   .folder-backdrop .new-folder .folder-name-container {
     width: 100%;
@@ -1440,10 +1438,10 @@
     padding: .5em;
   }
   .folder-backdrop .new-folder .folder-name-container input {
-    width: 200px;
+    width: 90%;
   }
   .folder-backdrop .new-folder .button {
-    width: 200px;
+    width: 90%;
   }
   .folder-backdrop .new-folder .button button, .folder-backdrop .new-folder .button .share-file .buttons .back, .share-file .buttons .folder-backdrop .new-folder .button .back {
     padding: .5em 1em;
@@ -1793,28 +1791,6 @@
   cursor: pointer;
 }
 
-.change-password-container .buttons .change-password-link {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  color: black;
-  text-decoration: none;
-  border: 2px solid black;
-  width: 70px;
-  border-radius: .2em;
-  cursor: pointer;
-}
-
 .change-password-container .buttons .continue-btn {
   color: white;
   background: -webkit-gradient(linear, left top, right top, from(#096209), to(#a20d0d));
@@ -1946,11 +1922,6 @@
   cursor: pointer;
 }
 
-.delete-account-container .buttons .delete-account-link {
-  text-decoration: none;
-  color: black;
-}
-
 .delete-account-container .buttons .delete-btn {
   color: white;
   background: -webkit-gradient(linear, left top, right top, from(#096209), to(#a20d0d));
@@ -2074,7 +2045,8 @@
 }
 
 .navigation ul .auth-1,
-.navigation ul .auth-2 {
+.navigation ul .auth-2,
+.navigation ul .auth-3 {
   margin-left: 1em;
 }
 
@@ -2435,6 +2407,7 @@
   height: 35px;
   width: 250px;
   border-radius: .3em;
+  text-indent: 1em;
 }
 
 .shared-file-details .background-overlay .form .buttons {
