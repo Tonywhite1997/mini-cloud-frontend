@@ -196,7 +196,7 @@
   margin-bottom: 1em;
 }
 
-.signup-section .form .button button, .signup-section .form .button .share-file .buttons .back, .share-file .buttons .signup-section .form .button .back {
+.signup-section .form .button button {
   width: 90px;
   padding: .5em 1.25em;
   font-weight: 600;
@@ -212,12 +212,12 @@
   transition: background-color 0.3s ease, transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 
-.signup-section .form .button button:hover, .signup-section .form .button .share-file .buttons .back:hover, .share-file .buttons .signup-section .form .button .back:hover {
+.signup-section .form .button button:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
 
-.signup-section .form .button button:active, .signup-section .form .button .share-file .buttons .back:active, .share-file .buttons .signup-section .form .button .back:active {
+.signup-section .form .button button:active {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
 }
@@ -335,7 +335,7 @@
   margin-bottom: 1em;
 }
 
-.login-section .form .button button, .login-section .form .button .share-file .buttons .back, .share-file .buttons .login-section .form .button .back {
+.login-section .form .button button {
   padding: .5em 1.25em;
   font-weight: 600;
   border: none;
@@ -351,12 +351,12 @@
   width: 100px;
 }
 
-.login-section .form .button button:hover, .login-section .form .button .share-file .buttons .back:hover, .share-file .buttons .login-section .form .button .back:hover {
+.login-section .form .button button:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
 
-.login-section .form .button button:active, .login-section .form .button .share-file .buttons .back:active, .share-file .buttons .login-section .form .button .back:active {
+.login-section .form .button button:active {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
 }
@@ -867,7 +867,7 @@
   width: 100%;
 }
 
-.dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons button, .dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons .share-file .buttons .back, .share-file .buttons .dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons .back {
+.dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons button {
   width: 100px;
   padding: .5em 2em;
   font-weight: 600;
@@ -879,7 +879,7 @@
   transition: color 200ms ease-in;
 }
 
-.dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons button:hover, .dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons .share-file .buttons .back:hover, .share-file .buttons .dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons .back:hover {
+.dashboard .dashboard-action-section .file-section-container .folder-name-container .move-buttons button:hover {
   background: -webkit-gradient(linear, left top, right top, from(white));
   background: linear-gradient(to right, white);
   color: black;
@@ -1388,7 +1388,7 @@
   padding: .5em 0;
 }
 
-.folder-backdrop .new-folder .button button, .folder-backdrop .new-folder .button .share-file .buttons .back, .share-file .buttons .folder-backdrop .new-folder .button .back {
+.folder-backdrop .new-folder .button button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1443,7 +1443,7 @@
   .folder-backdrop .new-folder .button {
     width: 90%;
   }
-  .folder-backdrop .new-folder .button button, .folder-backdrop .new-folder .button .share-file .buttons .back, .share-file .buttons .folder-backdrop .new-folder .button .back {
+  .folder-backdrop .new-folder .button button {
     padding: .5em 1em;
   }
 }
@@ -1784,7 +1784,7 @@
   padding: .3em 0;
 }
 
-.change-password-container .buttons button, .change-password-container .share-file .buttons .back, .share-file .change-password-container .buttons .back {
+.change-password-container .buttons button {
   width: 70px;
   padding: .3em 0;
   border-radius: .2em;
@@ -1902,7 +1902,7 @@
   padding: .3em 0;
 }
 
-.delete-account-container .buttons button, .delete-account-container .share-file .buttons .back, .share-file .delete-account-container .buttons .back {
+.delete-account-container .buttons button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1972,7 +1972,7 @@
   margin-bottom: 1em;
 }
 
-.forgot-password-page button, .forgot-password-page .share-file .buttons .back, .share-file .buttons .forgot-password-page .back {
+.forgot-password-page button {
   width: 80px;
   padding: .5em 0;
   background: -webkit-gradient(linear, left top, right top, from(#0b790b), to(#880505));
@@ -2077,7 +2077,7 @@
   padding: 0 1em;
 }
 
-.share-file button, .share-file .buttons .back {
+.share-file button {
   width: 80px;
   padding: .3em;
   background: -webkit-gradient(linear, left top, right top, from(#5c1d1d), to(#144614));
@@ -2189,24 +2189,6 @@
       -ms-flex-direction: row;
           flex-direction: row;
   gap: .5em;
-}
-
-.share-file .buttons .back {
-  text-decoration: none;
-  font-size: .82rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
 }
 
 .shared-file-dash {
@@ -2432,7 +2414,7 @@
   padding: .5em 0;
 }
 
-.shared-file-details .background-overlay .form .buttons button, .shared-file-details .background-overlay .form .share-file .buttons .back, .share-file .shared-file-details .background-overlay .form .buttons .back {
+.shared-file-details .background-overlay .form .buttons button {
   border: none;
   width: 80px;
   padding: .3em .5em;
@@ -2586,10 +2568,8 @@
   margin-bottom: .5em;
 }
 
-.shared-file-details .owner-section .edit-permissions-container .buttons button, .shared-file-details .owner-section .edit-permissions-container .share-file .buttons .back, .share-file .shared-file-details .owner-section .edit-permissions-container .buttons .back,
-.shared-file-details .recipient-section .edit-permissions-container .buttons button,
-.shared-file-details .recipient-section .edit-permissions-container .share-file .buttons .back,
-.share-file .shared-file-details .recipient-section .edit-permissions-container .buttons .back {
+.shared-file-details .owner-section .edit-permissions-container .buttons button,
+.shared-file-details .recipient-section .edit-permissions-container .buttons button {
   border: none;
   width: 120px;
   padding: .3em .5em;
@@ -2604,7 +2584,7 @@
   color: white;
 }
 
-.shared-file-details .recipient-section button, .shared-file-details .recipient-section .share-file .buttons .back, .share-file .buttons .shared-file-details .recipient-section .back {
+.shared-file-details .recipient-section button {
   border: none;
   width: 80px;
   padding: .3em .5em;
@@ -2661,7 +2641,7 @@
           flex-direction: column;
 }
 
-.shared-file-details .recipient-section .withdraw-access button, .shared-file-details .recipient-section .withdraw-access .share-file .buttons .back, .share-file .buttons .shared-file-details .recipient-section .withdraw-access .back {
+.shared-file-details .recipient-section .withdraw-access button {
   width: 150px;
   background-color: #d62828;
   color: white;
@@ -2694,7 +2674,7 @@ body {
   height: 100%;
 }
 
-#root button, #root .share-file .buttons .back, .share-file .buttons #root .back {
+#root button {
   cursor: pointer;
 }
 /*# sourceMappingURL=root.css.map */

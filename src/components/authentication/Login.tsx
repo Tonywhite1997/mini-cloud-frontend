@@ -14,8 +14,6 @@ function Login() {
 
   useEffect(() => {
     if (!isLoading && user?._id) {
-      console.log("hello");
-
       navigate("/user/dashboard");
     }
   }, [user?._id, navigate]);

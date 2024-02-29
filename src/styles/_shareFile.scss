@@ -69,12 +69,5 @@
         width: 250px;
         @include flex(row);
         gap: .5em;
-
-        .back {
-            text-decoration: none;
-            @extend button;
-            font-size: .82rem;
-            @include flex(row);
-        }
     }
 }

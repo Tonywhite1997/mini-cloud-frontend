@@ -133,9 +133,6 @@ function ShareFile() {
         </div>
       </div>
       <div className="buttons">
-        <Link to="/user/dashboard" className="back">
-          cancel
-        </Link>
         <button onClick={shareFile}>
           {isLoading ? <SmallLoader /> : "share"}
         </button>
