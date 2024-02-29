@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import SmallLoader from "../../../UI/SmallLoader";
 import urls from "../../../utils/authURL";
 import { ERROR_DATA } from "../../../utils/customTypes";

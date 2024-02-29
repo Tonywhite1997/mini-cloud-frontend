@@ -1127,12 +1127,16 @@
   text-overflow: ellipsis;
 }
 
-.dashboard .dashboard-action-section .file-section-container .dashboard-file-section .folder-container .folder-options-button, .dashboard .dashboard-action-section .file-section-container .dashboard-file-section .file-container .folder-options-button {
+.dashboard .dashboard-action-section .file-section-container .dashboard-file-section .folder-container .folder-options-button, .dashboard .dashboard-action-section .file-section-container .dashboard-file-section .file-container .folder-options-button, .dashboard .dashboard-action-section .file-section-container .dashboard-file-section .file-container .file-options-button {
   font-size: 1.5rem;
   cursor: pointer;
 }
 
 .dashboard .dashboard-action-section .file-section-container .dashboard-file-section .file-container {
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   cursor: pointer;
 }
 
@@ -1170,8 +1174,8 @@
 }
 
 .dashboard .dashboard-action-section .file-section-container .dashboard-file-section .file-container .file .file-type {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1220,11 +1224,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-.dashboard .dashboard-action-section .file-section-container .dashboard-file-section .file-container .file-options-button {
-  font-size: 1.5rem;
-  width: 10px;
 }
 
 @media screen and (max-width: 1000px) {

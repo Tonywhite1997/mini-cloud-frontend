@@ -479,7 +479,9 @@
                 }
 
                 .file-container {
+                    width: 100%;
                     @extend .folder-container;
+                    justify-content: space-between;
                     cursor: pointer;
 
                     p {
@@ -503,8 +505,8 @@
                         gap: .5em;
 
                         .file-type {
-                            width: 30px;
-                            height: 30px;
+                            width: 28px;
+                            height: 28px;
                             @include flex(row);
                             background: linear-gradient(to right, rgb(184, 59, 59), rgb(25, 111, 25));
                             color: white;
@@ -531,8 +533,7 @@
                     }
 
                     .file-options-button {
-                        font-size: 1.5rem;
-                        width: 10px;
+                        @extend .folder-options-button;
                     }
                 }
             }
