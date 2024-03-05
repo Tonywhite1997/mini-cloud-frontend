@@ -10,10 +10,11 @@ function SearchFile({ setIsSearchOpen, files }) {
     useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<FILE | null>(null);
 
-  const searchRegex = new RegExp(searchString, "i");
+  const searchRegex = new RegExp(searchString, "ig");
   const res = searchString
     ? files.filter((obj: FILE) =>
-        Object.values(obj).some((val) => searchRegex.test(val))
+        // Object.values(obj).some((val) => searchRegex.test(val))
+        searchRegex.test(obj.fileName)
       )
     : [];
 

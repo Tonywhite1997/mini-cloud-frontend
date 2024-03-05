@@ -1,10 +1,10 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
+import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import urls from "./authURL";
 import { FILE, FileContextType, USER, UserContextType } from "./customTypes";
 import { returnToLoginPage } from "./generalCommands/ReturnToLoginPage";
-import Loader from "../UI/Loader";
 
 const initialUser = {
   allocatedSpace: 0,
@@ -50,18 +50,24 @@ export const UserProvider = ({ children }: ChildrenProps) => {
 
   const [user, setUser] = useState<USER>(initialUser);
 
-  const persistLogin = async () => {
+  const handlePersistLogin = async () => {
     setIsLogIn(true);
     try {
       const { data } = await axios.get(`${urls.authURL}/check-if-login`);
-      setIsLogIn(false);
       setUser(data?.user);
+      setIsLogIn(false);
     } catch (error) {
       setIsLogIn(false);
       setIsError(true);
       returnToLoginPage(error);
     }
   };
+
+  const { refetch: persistLogin } = useQuery(
+    "CHECK_LOGIN_DATA",
+    handlePersistLogin,
+    { refetchOnWindowFocus: false }
+  );
 
   const location = useLocation();
 
@@ -79,11 +85,10 @@ export const UserProvider = ({ children }: ChildrenProps) => {
     if (!shouldAuthCheckRun) {
       persistLogin();
     }
-  }, [shouldAuthCheckRun]);
+  }, [shouldAuthCheckRun, persistLogin]);
 
   return (
     <>
-      {isLogIn && <Loader />}
       <userContext.Provider
         value={{ user, setUser, isLogIn, setIsLogIn, isError }}
       >

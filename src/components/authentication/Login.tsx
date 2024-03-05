@@ -6,6 +6,7 @@ import urls from "../../utils/authURL";
 import { userContext } from "../../utils/context";
 import SmallLoader from "../../UI/SmallLoader";
 import { ERROR_DATA, UserContextType } from "../../utils/customTypes";
+import Loader from "../../UI/Loader";
 
 function Login() {
   const { user, setUser, isLogIn } = useContext<UserContextType>(userContext);
@@ -73,6 +74,10 @@ function Login() {
   useEffect(() => {
     setUser(data && data.data.user);
   }, [setUser, data]);
+
+  if (isLogIn) {
+    return <Loader />;
+  }
 
   return (
     <section className="login-section">
