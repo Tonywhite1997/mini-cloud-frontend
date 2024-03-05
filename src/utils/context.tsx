@@ -50,7 +50,7 @@ export const UserProvider = ({ children }: ChildrenProps) => {
 
   const [user, setUser] = useState<USER>(initialUser);
 
-  const handlePersistLogin = async () => {
+  const persistLogin = async () => {
     setIsLogIn(true);
     try {
       const { data } = await axios.get(`${urls.authURL}/check-if-login`);
@@ -63,11 +63,11 @@ export const UserProvider = ({ children }: ChildrenProps) => {
     }
   };
 
-  const { refetch: persistLogin } = useQuery(
-    "CHECK_LOGIN_DATA",
-    handlePersistLogin,
-    { refetchOnWindowFocus: false }
-  );
+  // const { refetch: persistLogin } = useQuery(
+  //   "CHECK_LOGIN_DATA",
+  //   handlePersistLogin,
+  //   { refetchOnWindowFocus: false }
+  // );
 
   const location = useLocation();
 
@@ -83,9 +83,11 @@ export const UserProvider = ({ children }: ChildrenProps) => {
 
   useEffect(() => {
     if (!shouldAuthCheckRun) {
+      console.log("hello");
+
       persistLogin();
     }
-  }, [shouldAuthCheckRun, persistLogin]);
+  }, [shouldAuthCheckRun, window.location]);
 
   return (
     <>
