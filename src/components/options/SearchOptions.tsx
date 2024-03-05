@@ -1,26 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useMutation } from "react-query";
+// import { useMutation } from "react-query";
 import CancelIcon from "../../assets/CancelIcon";
 import DeleteIcon from "../../assets/DeleteIcon";
-import DownloadIcon from "../../assets/DownloadIcon";
+// import DownloadIcon from "../../assets/DownloadIcon";
 import ViewIcon from "../../assets/ViewIcon";
-import MoveIcon from "../../assets/MoveIcon";
-import RenameIcon from "../../assets/RenameIcon";
+// import MoveIcon from "../../assets/MoveIcon";
+// import RenameIcon from "../../assets/RenameIcon";
 import urls from "../../utils/authURL";
-import { FILE } from "../../utils/customTypes";
-import { userContext } from "../../utils/context";
-import { fileContext } from "../../utils/context";
-import { downloadFileSetup } from "../../utils/downloadSetup";
+// import { FILE } from "../../utils/customTypes";
+// import { userContext } from "../../utils/context";
+// import { fileContext } from "../../utils/context";
+// import { downloadFileSetup } from "../../utils/downloadSetup";
 import SmallLoader from "../../UI/SmallLoader";
 import { returnToLoginPage } from "../../utils/generalCommands/ReturnToLoginPage";
-import ShareIcon from "../../assets/ShareIcon";
+// import ShareIcon from "../../assets/ShareIcon";
 
 function FileOptions({ searchOptionsProps }) {
   const {
     setIsSearchOptionsOpen,
-    isSearchOptionsOpen,
+    // isSearchOptionsOpen,
     selectedFile,
     setIsSearchOpen,
   } = searchOptionsProps;
