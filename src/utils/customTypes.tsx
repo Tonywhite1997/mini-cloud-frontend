@@ -15,9 +15,9 @@ export interface FILE {
 
 export interface UserContextType {
   user: USER;
-  isLoading: boolean;
+  isLogIn: boolean;
   setUser: Dispatch<SetStateAction<USER>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setIsLogIn: Dispatch<SetStateAction<boolean>>;
   isError: boolean;
 }
 export interface FileContextType {

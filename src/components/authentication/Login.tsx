@@ -8,12 +8,13 @@ import SmallLoader from "../../UI/SmallLoader";
 import { ERROR_DATA, UserContextType } from "../../utils/customTypes";
 
 function Login() {
-  const { user, setUser, isLoading, setIsLoading } =
-    useContext<UserContextType>(userContext);
+  const { user, setUser, isLogIn } = useContext<UserContextType>(userContext);
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   useEffect(() => {
-    if (!isLoading && user?._id) {
+    if (!isLogIn && user?._id) {
       navigate("/user/dashboard");
     }
   }, [user?._id, navigate]);
@@ -36,9 +37,9 @@ function Login() {
   }
 
   const handleLogin = async () => {
+    setIsLoading(true);
     setError({ isError: false, errorMsg: "" });
     try {
-      setIsLoading(true);
       const response = await axios.post(
         `${urls.authURL}/login`,
         userLoginData,
@@ -72,12 +73,6 @@ function Login() {
   useEffect(() => {
     setUser(data && data.data.user);
   }, [setUser, data]);
-
-  // useEffect(() => {
-  //   if (user?._id && !error.isError) {
-  //     navigate("/user/dashboard");
-  //   }
-  // }, [user?._id, navigate, error.isError]);
 
   return (
     <section className="login-section">

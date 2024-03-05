@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
+import axios from "axios";
 import ImageViewer from "./fileViewersAndPlayers/ImageViewer";
 import AudioPlayer from "./fileViewersAndPlayers/AudioPlayer";
 import PDFviewer from "./fileViewersAndPlayers/PDFviewer";
 import VideoPlayer from "./fileViewersAndPlayers/VideoPlayer";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ERROR_DATA, FILE } from "../utils/customTypes";
-import axios from "axios";
 import urls from "../utils/authURL";
 import { returnToLoginPage } from "../utils/generalCommands/ReturnToLoginPage";
 import Loader from "../UI/Loader";
@@ -56,9 +56,7 @@ function DisplayFilePage() {
 
   const { fileID } = useParams<{ fileID: string }>();
 
-  const location = useLocation();
-
-  useQuery("FILE", {
+  const { refetch: loadFile } = useQuery("FILE", {
     queryFn: async () => {
       setIsLoading(true);
       try {
@@ -89,12 +87,18 @@ function DisplayFilePage() {
     refetchOnWindowFocus: false,
   });
 
+  useEffect(() => {
+    loadFile();
+  }, [fileID]);
+
   const types = ["audio", "video", "image", "application/pdf"];
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="display-file-page">
-      {isLoading && <Loader />}
-
       {file._id && !types.some((type) => file.mimetype.includes(type)) && (
         <p>File not supported</p>
       )}

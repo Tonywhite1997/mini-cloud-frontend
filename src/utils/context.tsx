@@ -24,9 +24,9 @@ const initialFile = {
 };
 
 export const userContext = createContext<UserContextType>({
-  isLoading: false,
+  isLogIn: false,
   user: initialUser,
-  setIsLoading: () => {
+  setIsLogIn: () => {
     false;
   },
   setUser: () => {},
@@ -45,19 +45,19 @@ interface ChildrenProps {
 }
 
 export const UserProvider = ({ children }: ChildrenProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const [user, setUser] = useState<USER>(initialUser);
 
   const persistLogin = async () => {
-    setIsLoading(true);
+    setIsLogIn(true);
     try {
       const { data } = await axios.get(`${urls.authURL}/check-if-login`);
-      setIsLoading(false);
+      setIsLogIn(false);
       setUser(data?.user);
     } catch (error) {
-      setIsLoading(false);
+      setIsLogIn(false);
       setIsError(true);
       returnToLoginPage(error);
     }
@@ -83,9 +83,9 @@ export const UserProvider = ({ children }: ChildrenProps) => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {isLogIn && <Loader />}
       <userContext.Provider
-        value={{ user, setUser, isLoading, setIsLoading, isError }}
+        value={{ user, setUser, isLogIn, setIsLogIn, isError }}
       >
         {children}
       </userContext.Provider>

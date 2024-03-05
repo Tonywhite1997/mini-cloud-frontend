@@ -10,8 +10,70 @@
     justify-content: space-between;
     padding: 0 2em;
     min-height: 12%;
+    width: 100%;
+    background-color: white;
+    position: relative;
     // border: 1px solid red;
 
+    .search {
+        position: absolute;
+        right: 0;
+        left: 0;
+        box-shadow: 0 0 2px 0 rgb(184, 183, 183);
+        top: 100%;
+        background-color: white;
+        height: 88vh;
+        padding: 1em 0;
+        z-index: 2;
+        @include flex(column);
+        justify-content: flex-start;
+        overflow-y: scroll;
+        // border: 1px solid red;
+
+        .cancel-icon {
+            // background-color: black;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 30px;
+            width: 30px;
+        }
+
+        input {
+            // border: 1px solid red;
+            min-height: 35px;
+            width: 250px;
+            border-radius: .3em;
+            text-indent: .5em;
+            margin-bottom: 2em;
+            margin-top: 2em;
+        }
+
+        .file {
+            // border: 1px solid red;
+            width: 250px;
+            @include flex(row);
+            justify-content: space-between;
+            gap: 2em;
+            margin-bottom: .5em;
+            padding: .5em .5em;
+            border-bottom: .75px solid rgb(199, 198, 198);
+
+            .file-name {
+                // border: 1px solid red;
+                width: 80%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+            }
+        }
+
+        .toggle-icon {
+            cursor: pointer;
+        }
+
+    }
 
     &-logo {
         width: fit-content;
@@ -42,10 +104,55 @@
         font-weight: 600;
     }
 
+    .header-icons {
+        @include flex(row);
+        // border: 1px solid red;
+        align-items: center;
+        justify-content: center;
+
+        .bell-icon,
+        .search-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .bell-icon-container {
+            @include flex(row);
+            position: relative;
+            height: 40px;
+            width: 40px;
+
+            .bell-icon,
+            small {
+                position: absolute;
+            }
+
+            small {
+                font-weight: 600;
+                font-size: .75rem;
+                @include flex(row);
+                right: 0;
+                top: 5px;
+                width: 20px;
+                height: 20px;
+                background-color: rgb(184, 59, 59);
+                color: white;
+                border-radius: 100%;
+                cursor: pointer;
+            }
+        }
+    }
+
 }
 
 @media screen and (max-width:"650px") {
     .header {
         padding: .5em;
+
+        .search {
+            right: .5em;
+            left: .5em;
+        }
     }
 }

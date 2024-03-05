@@ -1,0 +1,86 @@
+ .search-backdrop {
+     position: absolute;
+     display: flex;
+     align-items: flex-end;
+     justify-content: center;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     z-index: 1;
+     background-color: rgba(128, 128, 128, 0.34);
+
+     .search-options {
+         width: 50%;
+         position: relative;
+         padding: .5em 1em;
+         padding-top: 2em;
+         z-index: 2;
+         height: 60%;
+         overflow-y: scroll;
+         background-color: rgb(69, 68, 68);
+         color: white;
+
+
+         .selected-search-container {
+             @include flex(row);
+             justify-content: flex-start;
+             align-items: center;
+             width: 100%;
+             gap: .5em;
+             padding-bottom: .3em;
+             margin-bottom: .5em;
+             border-bottom: 1px solid grey;
+
+             font-size: .8rem;
+             color: rgb(212, 210, 210);
+             font-weight: 600;
+
+             .file-extension {
+                 width: 30px;
+                 height: 30px;
+                 margin-right: .5em;
+                 padding: 1em 1em;
+                 @include flex(row);
+                 background: linear-gradient(to right, rgb(184, 59, 59), rgb(25, 111, 25));
+
+                 p {
+
+                     font-size: .8rem;
+                     font-weight: 400;
+                     font-size: .6rem;
+                 }
+             }
+         }
+
+         .file-search-view,
+         .file-search-remove {
+             // border: 1px solid red;
+             @include flex(row);
+             justify-content: flex-start;
+             align-content: center;
+             gap: .5em;
+             margin-bottom: .5em;
+             padding: .2em 0;
+             cursor: pointer;
+             text-decoration: none;
+             color: rgb(212, 210, 210);
+             font-size: .8rem;
+
+             .view-icon,
+             .delete-icon {
+                 width: 20px;
+                 height: 20px;
+             }
+         }
+     }
+ }
+
+ @media screen and (max-width:650px) {
+     .search-backdrop {
+
+         .search-options {
+             width: 100%;
+         }
+     }
+ }

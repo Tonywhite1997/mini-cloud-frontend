@@ -94,13 +94,14 @@ function MoveFile({ moveFileProps }) {
       }
     }
   }
+
   async function moveFileToNewFolder() {
     if (multipleFilesSelected.length > 0) {
       return moveMultipleFiles();
     }
 
     const targetFolder = data.find((folder: FOLDER) => {
-      if (folder.name === selectedFolder) {
+      if (folder.name.trim() === selectedFolder.trim()) {
         return folder;
       }
     });
