@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import axios from "axios";
 import LockIcon from "../../../assets/LockIcon";
@@ -27,7 +27,6 @@ function Navigation({ handleCurrentNav, currentNav, handleNavOpen }) {
   }
 
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   async function logout() {
     setIsLoading(true);
@@ -43,7 +42,7 @@ function Navigation({ handleCurrentNav, currentNav, handleNavOpen }) {
         isVerified: false,
       });
       setIsLoading(false);
-      navigate("/auth/login");
+      window.location.assign("/auth/login");
     } catch (error) {
       setIsLoading(false);
       returnToLoginPage(error);

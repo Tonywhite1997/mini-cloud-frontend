@@ -76,8 +76,6 @@ export const UserProvider = ({ children }: ChildrenProps) => {
 
   useEffect(() => {
     if (!shouldAuthCheckRun) {
-      console.log("hello");
-
       persistLogin();
     }
   }, [shouldAuthCheckRun]);
