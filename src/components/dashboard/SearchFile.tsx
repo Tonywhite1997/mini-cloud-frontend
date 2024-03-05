@@ -12,10 +12,7 @@ function SearchFile({ setIsSearchOpen, files }) {
 
   const searchRegex = new RegExp(searchString, "ig");
   const res = searchString
-    ? files.filter((obj: FILE) =>
-        // Object.values(obj).some((val) => searchRegex.test(val))
-        searchRegex.test(obj.fileName)
-      )
+    ? files?.filter((obj: FILE) => searchRegex.test(obj.fileName))
     : [];
 
   useEffect(() => {
