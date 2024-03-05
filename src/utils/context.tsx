@@ -1,6 +1,5 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
-import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import urls from "./authURL";
 import { FILE, FileContextType, USER, UserContextType } from "./customTypes";
@@ -63,12 +62,6 @@ export const UserProvider = ({ children }: ChildrenProps) => {
     }
   };
 
-  // const { refetch: persistLogin } = useQuery(
-  //   "CHECK_LOGIN_DATA",
-  //   handlePersistLogin,
-  //   { refetchOnWindowFocus: false }
-  // );
-
   const location = useLocation();
 
   const unCheckRoutes = [
@@ -87,7 +80,7 @@ export const UserProvider = ({ children }: ChildrenProps) => {
 
       persistLogin();
     }
-  }, [shouldAuthCheckRun, window.location]);
+  }, [shouldAuthCheckRun]);
 
   return (
     <>
