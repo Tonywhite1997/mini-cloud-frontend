@@ -10,7 +10,7 @@ import OpenNavIcon from "../../assets/OpenNavIcon";
 import CancelIcon from "../../assets/CancelIcon";
 
 function UserDashboard() {
-  const { user, isLoading } = useContext(userContext);
+  const { user, isLogIn } = useContext(userContext);
   const [currentNav, setCurrentNav] = useState<number>(0);
   const [isnavOpen, setIsNavOpen] = useState<boolean>(false);
   const [clientWidth, setClientWidth] = useState<number>(window.innerWidth);
@@ -29,10 +29,10 @@ function UserDashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && !user?._id) {
+    if (!isLogIn && !user?._id) {
       navigate("/auth/login");
     }
-  }, [user?._id, isLoading]);
+  }, [user?._id, isLogIn]);
 
   const isVerified = user?.isVerified || false;
 
