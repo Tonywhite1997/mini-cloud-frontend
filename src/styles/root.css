@@ -23,6 +23,10 @@
   position: relative;
 }
 
+.header .link {
+  color: black;
+}
+
 .header .search {
   position: absolute;
   right: 0;
@@ -63,7 +67,7 @@
 
 .header .search input {
   min-height: 35px;
-  width: 250px;
+  width: 350px;
   border-radius: .3em;
   text-indent: .5em;
   margin-bottom: 2em;
@@ -71,7 +75,7 @@
 }
 
 .header .search .file {
-  width: 250px;
+  width: 359px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1770,8 +1774,7 @@
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  width: 60%;
-  height: 100%;
+  min-height: calc(100vh - 12%);
   gap: .5em;
   padding-block: 2em;
 }
@@ -1838,18 +1841,6 @@
 .user-details-section .space-details .used .bar {
   border: 1px solid red;
   background-color: red;
-}
-
-@media screen and (max-width: 1000px) {
-  .user-details-section {
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .user-details-section {
-    width: 100%;
-  }
 }
 
 .change-password-container {
@@ -2837,7 +2828,7 @@
 }
 
 .search-backdrop .search-options {
-  width: 50%;
+  width: 500px;
   position: relative;
   padding: .5em 1em;
   padding-top: 2em;
@@ -2905,7 +2896,8 @@
 }
 
 .search-backdrop .search-options .file-search-view,
-.search-backdrop .search-options .file-search-remove {
+.search-backdrop .search-options .file-search-remove,
+.search-backdrop .search-options .file-search-share {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2935,10 +2927,22 @@
 
 .search-backdrop .search-options .file-search-view .view-icon,
 .search-backdrop .search-options .file-search-view .delete-icon,
+.search-backdrop .search-options .file-search-view .share-icon,
 .search-backdrop .search-options .file-search-remove .view-icon,
-.search-backdrop .search-options .file-search-remove .delete-icon {
+.search-backdrop .search-options .file-search-remove .delete-icon,
+.search-backdrop .search-options .file-search-remove .share-icon,
+.search-backdrop .search-options .file-search-share .view-icon,
+.search-backdrop .search-options .file-search-share .delete-icon,
+.search-backdrop .search-options .file-search-share .share-icon {
   width: 20px;
   height: 20px;
+  color: #3e983e;
+}
+
+.search-backdrop .search-options .file-search-view .delete-icon,
+.search-backdrop .search-options .file-search-remove .delete-icon,
+.search-backdrop .search-options .file-search-share .delete-icon {
+  color: #f35555;
 }
 
 @media screen and (max-width: 650px) {

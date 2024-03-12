@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import FileSection from "./dashboard-sections/FileSection";
-import UserDetailsSection from "./dashboard-sections/UserDetailsSection";
 import Navigation from "./dashboard-sections/Navigation";
 import { userContext } from "../../utils/context";
 import VerifyAccountNotification from "../VerifyAccountNotification";
@@ -11,7 +10,6 @@ import CancelIcon from "../../assets/CancelIcon";
 
 function UserDashboard() {
   const { user, isLogIn } = useContext(userContext);
-  const [currentNav, setCurrentNav] = useState<number>(0);
   const [isnavOpen, setIsNavOpen] = useState<boolean>(false);
   const [clientWidth, setClientWidth] = useState<number>(window.innerWidth);
 
@@ -61,23 +59,14 @@ function UserDashboard() {
         style={{ height: isVerified && "100%" }}
       >
         {isnavOpen && clientWidth < 650 && (
-          <Navigation
-            handleCurrentNav={setCurrentNav}
-            currentNav={currentNav}
-            handleNavOpen={setIsNavOpen}
-          />
+          <Navigation handleNavOpen={setIsNavOpen} />
         )}
         {!isnavOpen && clientWidth >= 650 && (
-          <Navigation
-            handleCurrentNav={setCurrentNav}
-            currentNav={currentNav}
-            handleNavOpen={setIsNavOpen}
-          />
+          <Navigation handleNavOpen={setIsNavOpen} />
         )}
 
         <div className="container">
-          {currentNav === 0 && <FileSection />}
-          {currentNav === 1 && <UserDetailsSection />}
+          <FileSection />
         </div>
       </div>
     </main>

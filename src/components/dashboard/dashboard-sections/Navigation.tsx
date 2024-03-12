@@ -11,14 +11,7 @@ import { returnToLoginPage } from "../../../utils/generalCommands/ReturnToLoginP
 import urls from "../../../utils/authURL";
 import SmallLoader from "../../../UI/SmallLoader";
 
-function Navigation({ handleCurrentNav, currentNav, handleNavOpen }) {
-  const databasestyle = {
-    backgroundColor: currentNav === 0 ? "rgb(42, 219, 110)" : "initial",
-  };
-  const profileStyle = {
-    backgroundColor: currentNav === 1 ? "rgb(42, 219, 110)" : "initial",
-  };
-
+function Navigation({ handleNavOpen }) {
   const { setUser } = useContext(userContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -53,9 +46,8 @@ function Navigation({ handleCurrentNav, currentNav, handleNavOpen }) {
     <nav className="navigation">
       <ul>
         <li
-          style={databasestyle}
+          style={{ backgroundColor: "rgb(42, 219, 110)" }}
           onClick={() => {
-            handleCurrentNav(0);
             exitNavBar();
           }}
         >
@@ -64,18 +56,13 @@ function Navigation({ handleCurrentNav, currentNav, handleNavOpen }) {
           </span>
           Database
         </li>
-        <li
-          style={profileStyle}
-          onClick={() => {
-            handleCurrentNav(1);
-            exitNavBar();
-          }}
-        >
+
+        <Link to="/user/profile" className="shared-file-link link">
           <span>
             <ProfileIcon />
           </span>
           Profile
-        </li>
+        </Link>
         <Link to="/share-file/dashboard" className="shared-file-link link">
           <span>
             <ShareIcon />

@@ -15,7 +15,6 @@ function UserDetailsSection() {
 
   return (
     <section className="user-details-section">
-      <div className="image"></div>
       <p>{user?.name}</p>
       <p>
         {user?.email}

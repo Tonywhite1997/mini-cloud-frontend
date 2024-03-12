@@ -11,7 +11,8 @@
      background-color: rgba(128, 128, 128, 0.34);
 
      .search-options {
-         width: 50%;
+         //  border: 1px solid red;
+         width: 500px;
          position: relative;
          padding: .5em 1em;
          padding-top: 2em;
@@ -54,7 +55,8 @@
          }
 
          .file-search-view,
-         .file-search-remove {
+         .file-search-remove,
+         .file-search-share {
              // border: 1px solid red;
              @include flex(row);
              justify-content: flex-start;
@@ -68,9 +70,15 @@
              font-size: .8rem;
 
              .view-icon,
-             .delete-icon {
+             .delete-icon,
+             .share-icon {
                  width: 20px;
                  height: 20px;
+                 color: rgb(62, 152, 62);
+             }
+
+             .delete-icon {
+                 color: rgb(243, 85, 85);
              }
          }
      }

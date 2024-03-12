@@ -20,7 +20,7 @@ function Header() {
       const { data } = await axios.get(`${urls.fileURL}/files`);
       setFiles(data.files);
     } catch (error) {
-      console.log(error);
+      throw new Error(error?.response?.data.message);
     }
   }
 
@@ -45,10 +45,10 @@ function Header() {
           >
             <SearchIcon />
           </div>
-          <div className="bell-icon-container">
+          <Link to="/user/notifications" className="bell-icon-container link">
             <BellIcon />
             <small>9+</small>
-          </div>
+          </Link>
         </div>
       )}
       {isSearchOpen && (

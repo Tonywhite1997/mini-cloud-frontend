@@ -16,6 +16,8 @@ import DeleteAccount from "./components/authentication/DeleteAccount";
 import ShareFile from "./components/dashboard/sharedFIle/ShareFile";
 import ShareFileDashboard from "./components/dashboard/sharedFIle/ShareFileDashboard";
 import SharedFileDetails from "./components/dashboard/sharedFIle/SharedFileDetails";
+import UserDetailsSection from "./components/dashboard/dashboard-sections/UserDetailsSection";
+import Notifications from "./components/notifications/Notifications";
 
 const queryClient = new QueryClient();
 
@@ -33,12 +35,16 @@ function App() {
 
               <Route path="/auth/login" element={<Login />} />
 
+              <Route path="/user/profile" element={<UserDetailsSection />} />
+
               <Route
                 path="/auth/verify-account"
                 element={<VerifyAccount />}
               ></Route>
 
               <Route path="/user/dashboard" element={<UserDashboard />} />
+
+              <Route path={"/user/notifications"} element={<Notifications />} />
 
               <Route
                 path="/files/:fileID/display"

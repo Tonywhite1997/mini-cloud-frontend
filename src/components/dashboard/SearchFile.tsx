@@ -24,7 +24,6 @@ function SearchFile({ setIsSearchOpen, files }) {
 
   const seacrchOptionsProps = {
     setIsSearchOptionsOpen,
-    isSearchOptionsOpen,
     selectedFile,
     setIsSearchOpen,
   };
