@@ -1,0 +1,46 @@
+.notifications-container {
+    // border: 1px solid red;
+    @include flex(column);
+    align-items: center;
+    gap: .5em;
+    margin-top: 2em;
+    padding: 0 1em;
+
+    .clear-btn {
+        width: 100px;
+        margin-bottom: .5em;
+        border: none;
+        padding: .3em .5em;
+        border-radius: .3em;
+        font-weight: 600;
+        background-color: rgb(205, 24, 24);
+        color: white;
+    }
+
+    .error-msg {
+        color: red;
+        text-align: center;
+    }
+
+    .notification {
+        background-color: rgb(42, 219, 110);
+        padding: 1em 1em;
+        border-radius: .5em;
+
+        p {
+            font-size: .8rem;
+        }
+
+        .date {
+            // border: 1px solid red;
+            @include flex(row);
+            align-items: center;
+            justify-content: flex-end;
+
+            p {
+                color: rgb(186, 16, 16);
+                font-weight: 600;
+            }
+        }
+    }
+}

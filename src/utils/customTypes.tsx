@@ -25,6 +25,14 @@ export interface FileContextType {
   setFileProviderData: Dispatch<SetStateAction<FILE>>;
 }
 
+export interface NOTIFICATION {
+  sender: string;
+  receiver: string;
+  notification: string;
+  _id: string;
+  createdAt: string;
+}
+
 export interface FileDataType {
   fileID: string;
   fileSize: number;

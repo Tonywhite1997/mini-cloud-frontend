@@ -138,7 +138,7 @@ function FileOptions({ folderFileOptionsProps }) {
         </div>
 
         <Link
-          to={`/file/share-file/${selectedFolderFile.id}/${selectedFolderFile.name}`}
+          to={`/file/share-file/${selectedFolderFile.id}`}
           className="folder-options-share"
         >
           <ShareIcon />

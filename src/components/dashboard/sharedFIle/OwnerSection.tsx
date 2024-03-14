@@ -67,11 +67,20 @@ function OwnerSection({ file }) {
 
   async function revokeRecipientPermissions() {
     setIsRevoking(true);
+    const notificationMsg = `User with email: ${
+      file?.recipientEmail
+    } revoked your access to file: ${file?.name?.slice(0, 50)}...`;
 
     try {
       await axios.post(`${urls.sharedFileURL}/file/revoke-permissions`, {
         fileID: file?._id,
       });
+
+      await axios.post(`${urls.notificationURL}/send`, {
+        receiverEmail: file?.recipientEmail,
+        message: notificationMsg,
+      });
+
       setIsRevoking(false);
       window.location.assign("/share-file/dashboard");
     } catch (error) {

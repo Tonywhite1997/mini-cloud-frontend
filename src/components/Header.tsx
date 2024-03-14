@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BellIcon from "../assets/BellIcon";
 import CloudIcon from "../assets/CloudIcon";
 import SearchIcon from "../assets/SearchIcon";
 import urls from "../utils/authURL";
 import { userContext } from "../utils/context";
-import { FILE } from "../utils/customTypes";
+import { FILE, NOTIFICATION } from "../utils/customTypes";
 import SearchFile from "./dashboard/SearchFile";
 
 function Header() {
@@ -14,6 +14,21 @@ function Header() {
 
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [files, setFiles] = useState<[FILE] | null>(null);
+  const [notifications, setNotifications] = useState<[NOTIFICATION]>(
+    [] as unknown as [NOTIFICATION]
+  );
+
+  async function getMyNotifications() {
+    const { data } = await axios.get(`${urls.notificationURL}`);
+
+    setNotifications(data.notifications);
+  }
+
+  useEffect(() => {
+    if (user?._id) {
+      getMyNotifications();
+    }
+  }, [user?._id]);
 
   async function getFiles() {
     try {
@@ -47,7 +62,11 @@ function Header() {
           </div>
           <Link to="/user/notifications" className="bell-icon-container link">
             <BellIcon />
-            <small>9+</small>
+            {notifications.length > 0 && (
+              <small>
+                {notifications.length > 9 ? "9+" : notifications.length}
+              </small>
+            )}
           </Link>
         </div>
       )}

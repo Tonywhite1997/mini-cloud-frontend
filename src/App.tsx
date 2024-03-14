@@ -61,10 +61,7 @@ function App() {
                 element={<ForgotPassword />}
               />
 
-              <Route
-                path="/file/share-file/:fileID/:filename"
-                element={<ShareFile />}
-              />
+              <Route path="/file/share-file/:fileID" element={<ShareFile />} />
 
               <Route
                 path="/share-file/dashboard"

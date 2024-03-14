@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "../../../UI/Loader";
 import SmallLoader from "../../../UI/SmallLoader";
 import urls from "../../../utils/authURL";
-import { ERROR_DATA } from "../../../utils/customTypes";
+import { ERROR_DATA, FILE } from "../../../utils/customTypes";
 import { returnToLoginPage } from "../../../utils/generalCommands/ReturnToLoginPage";
 
 interface SHAREDFILEDATA {
@@ -14,7 +15,7 @@ interface SHAREDFILEDATA {
 }
 
 function ShareFile() {
-  const { fileID, filename } = useParams();
+  const { fileID } = useParams();
   const [recipientEmail, setRecipientEmail] = useState<string>("");
   const [sharedFileData, setSharedFileData] = useState<SHAREDFILEDATA>({
     fileID: fileID || "",
@@ -28,6 +29,25 @@ function ShareFile() {
     errorMsg: "",
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isFetchingFile, setIsFetchingFile] = useState<boolean>(false);
+  const [file, setFile] = useState<FILE>(null);
+
+  async function fetchFile() {
+    setIsFetchingFile(true);
+
+    const { data } = await axios.get(`${urls.fileURL}/${fileID}`);
+    setFile(data.file);
+
+    setIsFetchingFile(false);
+    try {
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchFile();
+  }, []);
 
   function selectUserActionsToFile(
     e: ChangeEvent<HTMLInputElement>,
@@ -48,11 +68,21 @@ function ShareFile() {
       return;
     }
 
-    const dataPayload = { ...sharedFileData, filename, recipientEmail };
+    const dataPayload = {
+      ...sharedFileData,
+      filename: file?.fileName,
+      recipientEmail,
+    };
+    const notificationMsg = `User with email: ${recipientEmail} shared a file with you.`;
 
     try {
       await axios.post(`${urls.sharedFileURL}/share`, {
         dataPayload,
+      });
+
+      await axios.post(`${urls.notificationURL}/send`, {
+        receiverEmail: recipientEmail,
+        message: notificationMsg,
       });
       setIsLoading(false);
       window.location.assign("/share-file/dashboard");
@@ -71,10 +101,14 @@ function ShareFile() {
     }
   }
 
+  if (isFetchingFile) {
+    return <Loader />;
+  }
+
   return (
     <main className="share-file">
       <h3>
-        Sharing <span className="filename">{filename} </span>
+        Sharing <span className="filename">{file?.fileName} </span>
         with another validated user
       </h3>
       <div className="recipient">

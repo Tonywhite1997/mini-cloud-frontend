@@ -56,7 +56,10 @@ function Login() {
       setIsLoading(false);
 
       if (axios.isAxiosError(error)) {
-        if (error?.response?.data.status === 500) {
+        if (
+          error?.response?.data.status === 500 ||
+          error?.response?.status === 500
+        ) {
           return setError({
             isError: true,
             errorMsg: "something occured. try again",

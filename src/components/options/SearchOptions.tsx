@@ -86,7 +86,7 @@ function FileOptions({ searchOptionsProps }) {
         </div>
 
         <Link
-          to={`/file/share-file/${selectedFile._id}/${selectedFile.fileName}`}
+          to={`/file/share-file/${selectedFile._id}`}
           className="file-search-share"
           onClick={() => {
             removeSearchOptions();
