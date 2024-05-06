@@ -2,7 +2,14 @@ import React, { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import urls from "./authURL";
-import { FILE, FileContextType, USER, UserContextType } from "./customTypes";
+import {
+  FILE,
+  FileContextType,
+  NOTIFICATION,
+  Notification_Context,
+  USER,
+  UserContextType,
+} from "./customTypes";
 import { returnToLoginPage } from "./generalCommands/ReturnToLoginPage";
 
 const initialUser = {
@@ -36,6 +43,13 @@ export const fileContext = createContext<FileContextType>({
   fileProviderData: initialFile,
   setFileProviderData: () => {
     initialFile;
+  },
+});
+
+export const notificationContext = createContext<Notification_Context>({
+  notifications: [] as unknown as [NOTIFICATION],
+  setNotifications: () => {
+    [];
   },
 });
 
@@ -98,5 +112,22 @@ export const FileProvider = ({ children }: ChildrenProps) => {
     <fileContext.Provider value={{ fileProviderData, setFileProviderData }}>
       {children}
     </fileContext.Provider>
+  );
+};
+
+export const NotificationProvider = ({ children }: ChildrenProps) => {
+  const [notifications, setNotifications] = useState<[NOTIFICATION]>(
+    [] as unknown as [NOTIFICATION]
+  );
+
+  return (
+    <notificationContext.Provider
+      value={{
+        notifications,
+        setNotifications,
+      }}
+    >
+      {children}
+    </notificationContext.Provider>
   );
 };

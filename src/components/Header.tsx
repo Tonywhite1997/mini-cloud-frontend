@@ -1,32 +1,56 @@
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { io } from "socket.io-client";
 import BellIcon from "../assets/BellIcon";
 import CloudIcon from "../assets/CloudIcon";
 import SearchIcon from "../assets/SearchIcon";
 import urls from "../utils/authURL";
-import { userContext } from "../utils/context";
+import { userContext, notificationContext } from "../utils/context";
 import { FILE, NOTIFICATION } from "../utils/customTypes";
+import { returnToLoginPage } from "../utils/generalCommands/ReturnToLoginPage";
 import SearchFile from "./dashboard/SearchFile";
+
+const socket = io("http://localhost:5000");
 
 function Header() {
   const { user } = useContext(userContext);
+  const { notifications, setNotifications } = useContext(notificationContext);
 
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [files, setFiles] = useState<[FILE] | null>(null);
-  const [notifications, setNotifications] = useState<[NOTIFICATION]>(
-    [] as unknown as [NOTIFICATION]
-  );
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    socket.on("receive-share-file", (data) => {
+      setNotifications(data);
+    });
+  }, [socket]);
 
   async function getMyNotifications() {
-    const { data } = await axios.get(`${urls.notificationURL}`);
+    setIsLoading(true);
+    try {
+      const { data } = await axios.get(`${urls.notificationURL}`);
 
-    setNotifications(data.notifications);
+      setIsLoading(false);
+      return data;
+    } catch (error) {
+      setIsLoading(false);
+
+      if (isAxiosError(error)) {
+        returnToLoginPage(error);
+      }
+      throw new Error(error);
+    }
   }
 
   useEffect(() => {
     if (user?._id) {
-      getMyNotifications();
+      const data = getMyNotifications();
+      data.then((notifications) => {
+        setNotifications(notifications.notifications);
+      });
     }
   }, [user?._id]);
 
@@ -38,6 +62,12 @@ function Header() {
       throw new Error(error?.response?.data.message);
     }
   }
+
+  const unReadNotifications = notifications.filter(
+    (notification: NOTIFICATION) => {
+      return !notification.isRead;
+    }
+  );
 
   return (
     <header className="header">
@@ -62,9 +92,11 @@ function Header() {
           </div>
           <Link to="/user/notifications" className="bell-icon-container link">
             <BellIcon />
-            {notifications.length > 0 && (
+            {!isLoading && unReadNotifications?.length > 0 && (
               <small>
-                {notifications.length > 9 ? "9+" : notifications.length}
+                {unReadNotifications?.length > 9
+                  ? "9+"
+                  : unReadNotifications?.length}
               </small>
             )}
           </Link>

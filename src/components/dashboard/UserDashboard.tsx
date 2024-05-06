@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import FileSection from "./dashboard-sections/FileSection";
 import Navigation from "./dashboard-sections/Navigation";
 import { userContext } from "../../utils/context";

@@ -42,6 +42,7 @@ function FileOptions({ searchOptionsProps }) {
 
   function removeSearchOptions() {
     setIsSearchOptionsOpen(false);
+    setIsSearchOpen(false);
   }
 
   return (

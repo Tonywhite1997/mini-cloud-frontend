@@ -1,11 +1,15 @@
 import axios from "axios";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import React, { ChangeEvent, useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../../../UI/Loader";
 import SmallLoader from "../../../UI/SmallLoader";
 import urls from "../../../utils/authURL";
 import { ERROR_DATA, FILE } from "../../../utils/customTypes";
 import { returnToLoginPage } from "../../../utils/generalCommands/ReturnToLoginPage";
+import { notificationContext } from "../../../utils/context";
+
+const socket = io("http://localhost:5000");
 
 interface SHAREDFILEDATA {
   fileID: string;
@@ -15,6 +19,8 @@ interface SHAREDFILEDATA {
 }
 
 function ShareFile() {
+  const { setNotifications } = useContext(notificationContext);
+
   const { fileID } = useParams();
   const [recipientEmail, setRecipientEmail] = useState<string>("");
   const [sharedFileData, setSharedFileData] = useState<SHAREDFILEDATA>({
@@ -80,10 +86,12 @@ function ShareFile() {
         dataPayload,
       });
 
-      await axios.post(`${urls.notificationURL}/send`, {
+      const { data } = await axios.post(`${urls.notificationURL}/send`, {
         receiverEmail: recipientEmail,
         message: notificationMsg,
       });
+
+      socket.emit("share-file", data.notifications);
       setIsLoading(false);
       window.location.assign("/share-file/dashboard");
     } catch (error) {
@@ -100,6 +108,12 @@ function ShareFile() {
       }
     }
   }
+
+  useEffect(() => {
+    socket.on("receive-share-file", (data) => {
+      setNotifications(data);
+    });
+  }, [socket, setNotifications]);
 
   if (isFetchingFile) {
     return <Loader />;

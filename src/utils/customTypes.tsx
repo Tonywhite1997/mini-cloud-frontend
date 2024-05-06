@@ -13,16 +13,17 @@ export interface FILE {
   mimetype: string;
 }
 
+export interface FileContextType {
+  fileProviderData: FILE;
+  setFileProviderData: Dispatch<SetStateAction<FILE>>;
+}
+
 export interface UserContextType {
   user: USER;
   isLogIn: boolean;
   setUser: Dispatch<SetStateAction<USER>>;
   setIsLogIn: Dispatch<SetStateAction<boolean>>;
   isError: boolean;
-}
-export interface FileContextType {
-  fileProviderData: FILE;
-  setFileProviderData: Dispatch<SetStateAction<FILE>>;
 }
 
 export interface NOTIFICATION {
@@ -31,6 +32,12 @@ export interface NOTIFICATION {
   notification: string;
   _id: string;
   createdAt: string;
+  isRead: boolean;
+}
+
+export interface Notification_Context {
+  notifications: [NOTIFICATION];
+  setNotifications: Dispatch<SetStateAction<[NOTIFICATION]>>;
 }
 
 export interface FileDataType {
