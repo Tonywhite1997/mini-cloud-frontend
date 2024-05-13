@@ -12,6 +12,9 @@ const urls = {
   userURL: "https://minicloud.onrender.com/api/user",
   sharedFileURL: "https://minicloud.onrender.com/api/share-file",
   notificationURL: "https://minicloud.onrender.com/api/notification",
+
+  localSocket: "http://localhost:5000",
+  onlineSocket: "https://minicloud.onrender.com",
 };
 
 export default urls;

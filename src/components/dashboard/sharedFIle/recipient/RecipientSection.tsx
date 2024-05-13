@@ -7,8 +7,7 @@ import urls from "../../../../utils/authURL";
 import { ERROR_DATA } from "../../../../utils/customTypes";
 import { returnToLoginPage } from "../../../../utils/generalCommands/ReturnToLoginPage";
 
-const serverUrl: string =
-  "http://localhost:5000" || "https://minicloud.onrender.com";
+const serverUrl: string = urls.onlineSocket;
 
 const socket = io(serverUrl);
 

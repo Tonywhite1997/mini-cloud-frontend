@@ -12,8 +12,7 @@ interface PERMISSIONS {
   canDownload: boolean;
 }
 
-const serverUrl: string =
-  "http://localhost:5000" || "https://minicloud.onrender.com";
+const serverUrl: string = urls.onlineSocket;
 
 const socket = io(serverUrl);
 

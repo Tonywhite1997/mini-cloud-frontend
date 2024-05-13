@@ -9,8 +9,7 @@ import { ERROR_DATA, FILE } from "../../../utils/customTypes";
 import { returnToLoginPage } from "../../../utils/generalCommands/ReturnToLoginPage";
 import { userContext } from "../../../utils/context";
 
-const serverUrl: string =
-  "http://localhost:5000" || "https://minicloud.onrender.com";
+const serverUrl: string = urls.onlineSocket;
 
 const socket = io(serverUrl);
 

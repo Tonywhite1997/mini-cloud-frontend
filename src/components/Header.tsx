@@ -11,8 +11,7 @@ import { FILE, NOTIFICATION } from "../utils/customTypes";
 import { returnToLoginPage } from "../utils/generalCommands/ReturnToLoginPage";
 import SearchFile from "./dashboard/SearchFile";
 
-const serverUrl: string =
-  "http://localhost:5000" || "https://minicloud.onrender.com";
+const serverUrl: string = urls.onlineSocket;
 
 const socket = io(serverUrl);
 
