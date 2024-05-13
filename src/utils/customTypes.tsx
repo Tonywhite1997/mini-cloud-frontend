@@ -29,6 +29,8 @@ export interface UserContextType {
 export interface NOTIFICATION {
   sender: string;
   receiver: string;
+  receiverEmail: string;
+  senderEmail: string;
   notification: string;
   _id: string;
   createdAt: string;

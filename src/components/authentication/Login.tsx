@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useMutation } from "react-query";
 import axios from "axios";
+import { io } from "socket.io-client";
 import { Link, useNavigate } from "react-router-dom";
 import urls from "../../utils/authURL";
 import { userContext } from "../../utils/context";
 import SmallLoader from "../../UI/SmallLoader";
 import { ERROR_DATA, UserContextType } from "../../utils/customTypes";
 import Loader from "../../UI/Loader";
+
+const serverUrl: string =
+  "http://localhost:5000" || "https://minicloud.onrender.com";
+
+const socket = io(serverUrl);
 
 function Login() {
   const { user, setUser, isLogIn } = useContext<UserContextType>(userContext);
@@ -50,6 +56,9 @@ function Login() {
           },
         }
       );
+      // console.log(response);
+
+      socket.emit("add-user", response?.data?.user?.email);
       setIsLoading(false);
       return response;
     } catch (error) {

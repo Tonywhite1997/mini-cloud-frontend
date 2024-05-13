@@ -42,7 +42,7 @@ function FileOptions({ searchOptionsProps }) {
 
   function removeSearchOptions() {
     setIsSearchOptionsOpen(false);
-    setIsSearchOpen(false);
+    // setIsSearchOpen(false);
   }
 
   return (
@@ -69,6 +69,7 @@ function FileOptions({ searchOptionsProps }) {
           className="file-search-view"
           onClick={() => {
             removeSearchOptions();
+            setIsSearchOpen(false);
           }}
         >
           <ViewIcon />

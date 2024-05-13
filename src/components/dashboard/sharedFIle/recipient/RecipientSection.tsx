@@ -1,10 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 import SmallLoader from "../../../../UI/SmallLoader";
 import urls from "../../../../utils/authURL";
 import { ERROR_DATA } from "../../../../utils/customTypes";
 import { returnToLoginPage } from "../../../../utils/generalCommands/ReturnToLoginPage";
+
+const serverUrl: string =
+  "http://localhost:5000" || "https://minicloud.onrender.com";
+
+const socket = io(serverUrl);
 
 function RecipientSection({ file, setIsRenaming }) {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
@@ -27,6 +33,10 @@ function RecipientSection({ file, setIsRenaming }) {
   const formattedDate = `${day}/${month}/${year}`;
 
   async function deleteSharedFile() {
+    const notificationMsg = `User with email: ${
+      file?.recipientEmail
+    } deleted your file: ${file?.name?.slice(0, 50)}...`;
+
     setIsDeleting(true);
     try {
       await axios.delete(`${urls.sharedFileURL}/file/delete-file`, {
@@ -34,6 +44,13 @@ function RecipientSection({ file, setIsRenaming }) {
           fileID: file?._id,
         },
       });
+      const { data } = await axios.post(`${urls.notificationURL}/send`, {
+        receiverEmail: file?.ownerEmail,
+        message: notificationMsg,
+      });
+
+      socket.emit("delete-owner-file", data.notifications);
+
       setIsDeleting(false);
       window.location.assign("/share-file/dashboard");
     } catch (error) {
@@ -52,12 +69,27 @@ function RecipientSection({ file, setIsRenaming }) {
   }
 
   async function withdrawMyAccess() {
+    const notificationMsg = `User with email: ${
+      file?.recipientEmail
+    } does not have access to file: ${file?.name?.slice(
+      0,
+      50
+    )}... because he revoked his rights.`;
+
     setIsRevoking(true);
 
     try {
       await axios.post(`${urls.sharedFileURL}/file/revoke-permissions`, {
         fileID: file?._id,
       });
+
+      const { data } = await axios.post(`${urls.notificationURL}/send`, {
+        receiverEmail: file?.ownerEmail,
+        message: notificationMsg,
+      });
+
+      socket.emit("revoke-my-access", data.notifications);
+
       setIsRevoking(false);
       window.location.assign("/share-file/dashboard");
     } catch (error) {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { io } from "socket.io-client";
 import React, { ChangeEvent, useState } from "react";
 import SmallLoader from "../../../UI/SmallLoader";
 import urls from "../../../utils/authURL";
@@ -10,6 +11,12 @@ interface PERMISSIONS {
   canDelete: boolean;
   canDownload: boolean;
 }
+
+const serverUrl: string =
+  "http://localhost:5000" || "https://minicloud.onrender.com";
+
+const socket = io(serverUrl);
+
 function OwnerSection({ file }) {
   const [editPermissions, setEditPermissions] = useState<PERMISSIONS>({
     canDelete: file?.canDelete || false,
@@ -76,9 +83,15 @@ function OwnerSection({ file }) {
         fileID: file?._id,
       });
 
-      await axios.post(`${urls.notificationURL}/send`, {
+      const { data } = await axios.post(`${urls.notificationURL}/send`, {
         receiverEmail: file?.recipientEmail,
         message: notificationMsg,
+      });
+
+      // socket.emit("revoke-access", data.notifications);
+      socket.emit("revoke-access", {
+        data: data.notifications,
+        userID: file?.recipientEmail,
       });
 
       setIsRevoking(false);

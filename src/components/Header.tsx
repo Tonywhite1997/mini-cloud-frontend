@@ -11,7 +11,10 @@ import { FILE, NOTIFICATION } from "../utils/customTypes";
 import { returnToLoginPage } from "../utils/generalCommands/ReturnToLoginPage";
 import SearchFile from "./dashboard/SearchFile";
 
-const socket = io("http://localhost:5000");
+const serverUrl: string =
+  "http://localhost:5000" || "https://minicloud.onrender.com";
+
+const socket = io(serverUrl);
 
 function Header() {
   const { user } = useContext(userContext);
@@ -24,6 +27,24 @@ function Header() {
 
   useEffect(() => {
     socket.on("receive-share-file", (data) => {
+      setNotifications(data);
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("alert-revoke-access", (data) => {
+      setNotifications(data);
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("alert-file-owner", (data) => {
+      setNotifications(data);
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("alert-owner-my-access-revoke", (data) => {
       setNotifications(data);
     });
   }, [socket]);
@@ -65,7 +86,10 @@ function Header() {
 
   const unReadNotifications = notifications.filter(
     (notification: NOTIFICATION) => {
-      return !notification.isRead;
+      const matchesFilter =
+        notification.receiverEmail === user?.email && !notification.isRead;
+
+      return matchesFilter;
     }
   );
 

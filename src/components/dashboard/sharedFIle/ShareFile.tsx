@@ -7,9 +7,12 @@ import SmallLoader from "../../../UI/SmallLoader";
 import urls from "../../../utils/authURL";
 import { ERROR_DATA, FILE } from "../../../utils/customTypes";
 import { returnToLoginPage } from "../../../utils/generalCommands/ReturnToLoginPage";
-import { notificationContext } from "../../../utils/context";
+import { userContext } from "../../../utils/context";
 
-const socket = io("http://localhost:5000");
+const serverUrl: string =
+  "http://localhost:5000" || "https://minicloud.onrender.com";
+
+const socket = io(serverUrl);
 
 interface SHAREDFILEDATA {
   fileID: string;
@@ -19,7 +22,7 @@ interface SHAREDFILEDATA {
 }
 
 function ShareFile() {
-  const { setNotifications } = useContext(notificationContext);
+  const { user } = useContext(userContext);
 
   const { fileID } = useParams();
   const [recipientEmail, setRecipientEmail] = useState<string>("");
@@ -79,7 +82,7 @@ function ShareFile() {
       filename: file?.fileName,
       recipientEmail,
     };
-    const notificationMsg = `User with email: ${recipientEmail} shared a file with you.`;
+    const notificationMsg = `User with email: ${user?.email} shared a file with you.`;
 
     try {
       await axios.post(`${urls.sharedFileURL}/share`, {
@@ -91,7 +94,10 @@ function ShareFile() {
         message: notificationMsg,
       });
 
-      socket.emit("share-file", data.notifications);
+      socket.emit("share-file", {
+        data: data.notifications,
+        userID: recipientEmail,
+      });
       setIsLoading(false);
       window.location.assign("/share-file/dashboard");
     } catch (error) {
@@ -108,12 +114,6 @@ function ShareFile() {
       }
     }
   }
-
-  useEffect(() => {
-    socket.on("receive-share-file", (data) => {
-      setNotifications(data);
-    });
-  }, [socket, setNotifications]);
 
   if (isFetchingFile) {
     return <Loader />;

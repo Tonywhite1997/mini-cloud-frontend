@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   optimizeDeps: {
     exclude: ["js-big-decimal"],
+    include: ["uuid"],
   },
   plugins: [react()],
 });

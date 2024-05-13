@@ -1,30 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { format } from "date-fns";
-import { io } from "socket.io-client";
+import TimeAgo from "timeago-react";
 import urls from "../../utils/authURL";
 import { ERROR_DATA, NOTIFICATION } from "../../utils/customTypes";
-import { userContext } from "../../utils/context";
+import { userContext, notificationContext } from "../../utils/context";
 import Loader from "../../UI/Loader";
 import SmallLoader from "../../UI/SmallLoader";
 import { returnToLoginPage } from "../../utils/generalCommands/ReturnToLoginPage";
 
-const socket = io("http://localhost:5173");
-
 function Notifications() {
   const { user } = useContext(userContext);
-  const [notifications, setNotifications] = useState<[NOTIFICATION]>(
-    [] as unknown as [NOTIFICATION]
-  );
+
+  const { notifications, setNotifications } = useContext(notificationContext);
+
   const [error, setError] = useState<ERROR_DATA>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isClearing, setIsClearing] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   socket.on("receive-share-file", (data) => {
-  //     setNotifications(data);
-  //   });
-  // }, [socket]);
 
   async function getMyNotifications() {
     setIsLoading(true);
@@ -60,10 +51,6 @@ function Notifications() {
     }
   }, [user?._id]);
 
-  function formatDate(date: string) {
-    return format(new Date(date), "MMMM d, yyyy HH:mm");
-  }
-
   async function readMyNotifications() {
     try {
       const { data } = await axios.patch(`${urls.notificationURL}/read`);
@@ -79,9 +66,12 @@ function Notifications() {
     const unreadNotification = notifications.find(
       (notification: NOTIFICATION) => !notification?.isRead
     );
-    if (unreadNotification) {
-      readMyNotifications();
-    }
+
+    setTimeout(() => {
+      if (unreadNotification) {
+        readMyNotifications();
+      }
+    }, 3000);
   }, [notifications]);
 
   async function clearMyNotifications() {
@@ -110,6 +100,12 @@ function Notifications() {
     }
   }
 
+  const myNotifications = notifications.filter((notification: NOTIFICATION) => {
+    const matchesFilter = notification.receiverEmail === user?.email;
+
+    return matchesFilter;
+  });
+
   return (
     <main className="notifications-container">
       <h3>Notifications</h3>
@@ -126,18 +122,30 @@ function Notifications() {
         <p>no unread notifications</p>
       )}
       {!isLoading &&
-        notifications.length > 0 &&
-        notifications
+        // notifications.length > 0 &&
+        // notifications
+        myNotifications.length > 0 &&
+        myNotifications
           .sort(
             (a, b) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           )
           .map((notification: NOTIFICATION) => {
             return (
-              <div key={notification?._id} className="notification">
+              <div
+                key={notification?._id}
+                className="notification"
+                style={{
+                  backgroundColor: notification?.isRead
+                    ? "#eaf0e9"
+                    : "rgb(42, 219, 110)",
+                }}
+              >
                 <p>{notification?.notification}</p>
                 <div className="date">
-                  <p>{formatDate(notification?.createdAt)}</p>
+                  <p>
+                    <TimeAgo datetime={notification?.createdAt} />
+                  </p>
                 </div>
               </div>
             );

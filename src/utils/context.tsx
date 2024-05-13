@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
+import { io } from "socket.io-client";
 import { useLocation } from "react-router-dom";
 import urls from "./authURL";
 import {
@@ -28,6 +29,11 @@ const initialFile = {
   folder: "",
   mimetype: "",
 };
+
+const serverUrl: string =
+  "http://localhost:5000" || "https://minicloud.onrender.com";
+
+const socket = io(serverUrl);
 
 export const userContext = createContext<UserContextType>({
   isLogIn: false,
@@ -68,6 +74,7 @@ export const UserProvider = ({ children }: ChildrenProps) => {
     try {
       const { data } = await axios.get(`${urls.authURL}/check-if-login`);
       setUser(data?.user);
+      socket.emit("add-user", data?.user?.email);
       setIsLogIn(false);
     } catch (error) {
       setIsLogIn(false);
